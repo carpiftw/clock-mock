@@ -6,6 +6,7 @@ namespace SlopeIt\ClockMock;
 use DateTimeZone;
 use SlopeIt\ClockMock\DateTimeMock\DateTimeImmutableMock;
 use SlopeIt\ClockMock\DateTimeMock\DateTimeMock;
+use SlopeIt\ClockMock\DateTimeMock\NetteUtilsDateTimeMock;
 
 /**
  * Class that provides static utilities to freeze the current system time using the php-uopz extension.
@@ -63,6 +64,7 @@ final class ClockMock
 
         uopz_unset_mock(\DateTime::class);
         uopz_unset_mock(\DateTimeImmutable::class);
+        uopz_unset_mock(\Nette\Utils\DateTime::class);
 
         self::$areMocksActive = false;
         self::$frozenDateTime = null;
@@ -87,6 +89,7 @@ final class ClockMock
 
         uopz_set_mock(\DateTime::class, DateTimeMock::class);
         uopz_set_mock(\DateTimeImmutable::class, DateTimeImmutableMock::class);
+        uopz_set_mock(\Nette\Utils\DateTime::class, NetteUtilsDateTimeMock::class);
 
         self::$areMocksActive = true;
     }
